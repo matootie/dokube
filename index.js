@@ -18,11 +18,14 @@ async function run() {
     const options = {};
     options.outStream = kubeconfig;
     await exec.exec(`${doctl}/doctl`, ['kubernetes', 'cluster', 'kubeconfig', 'show', cluster, '--access-token', token], options);
+    
+    // Remove first line of Kubeconfig because it, for some bizzare reason, contains the command that was run "doctl kubernetes cluster ..."
     var data = fs.readFileSync(`${workdir}/dokubetemp/kubeconfig`, 'utf-8');
     let lines = data.split('\n');
     lines.splice(0,1);
     let formatted = lines.join('\n');
     fs.writeFileSync(`${workdir}/dokubetemp/kubeconfig`, formatted, 'utf-8');
+    
     const kubectl = await tc.downloadTool("https://storage.googleapis.com/kubernetes-release/release/v1.16.0/bin/linux/amd64/kubectl");
     await io.mv(kubectl, `${workdir}/dokubetemp/kubectl`);
     const cachedPath = await tc.cacheDir(`${workdir}/dokubetemp`, 'kubectl', 'v1.16.0');
