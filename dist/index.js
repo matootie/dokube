@@ -948,7 +948,6 @@ const fs = __webpack_require__(747);
 
 async function run() {
   try {
-    // Get Input Values for future use.
     const token = core.getInput('personalAccessToken', { required: true });
     const cluster = core.getInput('clusterName', { required: true });
     const workdir = process.env['GITHUB_WORKSPACE'];
@@ -959,13 +958,11 @@ async function run() {
     const options = {};
     options.outStream = kubeconfig;
     await exec.exec(`${doctl}/doctl`, ['kubernetes', 'cluster', 'kubeconfig', 'show', cluster, '--access-token', token], options);
-    await exec.exec(`cat ${workdir}/dokubetemp/kubeconfig`);
     var data = fs.readFileSync(`${workdir}/dokubetemp/kubeconfig`, 'utf-8');
     let lines = data.split('\n');
     lines.splice(0,1);
     let formatted = lines.join('\n');
     fs.writeFileSync(`${workdir}/dokubetemp/kubeconfig`, formatted, 'utf-8');
-    await exec.exec(`cat ${workdir}/dokubetemp/kubeconfig`);
     const kubectl = await tc.downloadTool("https://storage.googleapis.com/kubernetes-release/release/v1.16.0/bin/linux/amd64/kubectl");
     await io.mv(kubectl, `${workdir}/dokubetemp/kubectl`);
     const cachedPath = await tc.cacheDir(`${workdir}/dokubetemp`, 'kubectl', 'v1.16.0');
