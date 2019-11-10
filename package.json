@@ -1,0 +1,50 @@
+{
+  "name": "dokube",
+  "version": "1.0.0",
+  "description": "Use DigitalOcean Kubernetes in GitHub Actions",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint index.js",
+    "package": "ncc build index.js -o dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matootie/dokube.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "JavaScript",
+    "DigitalOcean",
+    "Kubernetes"
+  ],
+  "contributors": [
+    {
+      "name": "Mateja Lasan",
+      "email": "mateja@lasan.ca",
+      "url": "https://github.com/matootie"
+    },
+    {
+      "name": "Stephen Edwards",
+      "email": "sventi555@gmail.com",
+      "url": "https://github.com/sventi555"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uniappca/dokube/issues"
+  },
+  "homepage": "https://github.com/uniappca/dokube#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/exec": "^1.0.1",
+    "@actions/io": "^1.0.1",
+    "@actions/tool-cache": "^1.1.2",
+    "acorn": "^7.1.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.5",
+    "eslint": "^6.3.0",
+    "jest": "^24.9.0"
+  }
+}
