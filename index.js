@@ -1,3 +1,4 @@
+const fs =require('fs');
 const process = require('process');
 const request = require('request-promise-native');
 const core = require('@actions/core');

@@ -2418,6 +2418,7 @@ module.exports = {
 /* 104 */
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
+const fs =__webpack_require__(747);
 const process = __webpack_require__(765);
 const request = __webpack_require__(117);
 const core = __webpack_require__(470);
