@@ -56,7 +56,6 @@ async function run() {
         json: true
     };
     const clusters = await request(listClustersOptions);
-    console.log(clusters);
     const cluster = clusters['kubernetes_clusters'].find(c => c.name === clusterName);
     if (!cluster) throw new Error(`No cluster found with name: '${clusterName}'`);
     const clusterID = cluster['id'];
@@ -75,7 +74,6 @@ async function run() {
         json: true
     };
     const credentials = await request(getCredentialsOptions);
-    console.log(credentials);
     const server = credentials['server']
     const certAuthData = credentials['certificate_authority_data'];
     const kubeconfigToken = credentials['token'];
@@ -114,8 +112,6 @@ async function run() {
             }
         ]
     };
-
-    console.log(kubeconfig);
 
     // Save the kubeconfig object.
     const formattedConfig = JSON.stringify(kubeconfig, null, 4);
