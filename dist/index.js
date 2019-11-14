@@ -2418,12 +2418,12 @@ module.exports = {
 /* 104 */
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const io = __webpack_require__(213);
 const process = __webpack_require__(765);
 const request = __webpack_require__(117);
 const core = __webpack_require__(470);
-const tc = __webpack_require__(533);
 const exec = __webpack_require__(986);
+const io = __webpack_require__(1);
+const tc = __webpack_require__(533);
 
 async function run() {
   try {
@@ -6306,10 +6306,9 @@ module.exports = require("https");
 /***/ }),
 /* 212 */,
 /* 213 */
-/***/ (function() {
+/***/ (function(module) {
 
-eval("require")("io");
-
+module.exports = require("punycode");
 
 /***/ }),
 /* 214 */,
@@ -6647,7 +6646,7 @@ var VERSION = __webpack_require__(477).version;
 
 var punycode;
 try {
-  punycode = __webpack_require__(815);
+  punycode = __webpack_require__(213);
 } catch(e) {
   console.warn("tough-cookie: can't load punycode; won't use punycode for domain normalization");
 }
@@ -26404,7 +26403,7 @@ var VERSION = __webpack_require__(459);
 
 var punycode;
 try {
-  punycode = __webpack_require__(815);
+  punycode = __webpack_require__(213);
 } catch(e) {
   console.warn("tough-cookie: can't load punycode; won't use punycode for domain normalization");
 }
@@ -30005,7 +30004,7 @@ module.exports = require("fs");
 
 
 
-var Punycode = __webpack_require__(815);
+var Punycode = __webpack_require__(213);
 
 
 var internals = {};
@@ -32031,12 +32030,7 @@ module.exports = HARError
 
 
 /***/ }),
-/* 815 */
-/***/ (function(module) {
-
-module.exports = require("punycode");
-
-/***/ }),
+/* 815 */,
 /* 816 */,
 /* 817 */,
 /* 818 */,

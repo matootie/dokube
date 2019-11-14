@@ -1,9 +1,9 @@
-const io = require('io');
 const process = require('process');
 const request = require('request-promise-native');
 const core = require('@actions/core');
-const tc = require('@actions/tool-cache');
 const exec = require('@actions/exec');
+const io = require('@actions/io');
+const tc = require('@actions/tool-cache');
 
 async function run() {
   try {
