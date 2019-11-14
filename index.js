@@ -51,7 +51,8 @@ async function run() {
         uri: '/v2/kubernetes/clusters',
         headers: {
             Authorization: `Bearer ${accessToken}`
-        }
+        },
+        json: true
     };
     const clusters = await request(listClustersOptions);
     console.log(clusters);
@@ -69,7 +70,8 @@ async function run() {
         },
         qs: {
             expiry: expirationTime
-        }
+        },
+        json: true
     };
     const credentials = await request(getCredentialsOptions);
     console.log(credentials);
