@@ -21,6 +21,7 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using doc
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
+    expirationTime: 700
 
 - name: Get nodes
   run: kubectl get nodes
