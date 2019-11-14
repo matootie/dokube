@@ -2418,6 +2418,7 @@ module.exports = {
 /* 104 */
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
+const io = __webpack_require__(213);
 const process = __webpack_require__(765);
 const request = __webpack_require__(117);
 const core = __webpack_require__(470);
@@ -6305,9 +6306,10 @@ module.exports = require("https");
 /***/ }),
 /* 212 */,
 /* 213 */
-/***/ (function(module) {
+/***/ (function() {
 
-module.exports = require("punycode");
+eval("require")("io");
+
 
 /***/ }),
 /* 214 */,
@@ -6645,7 +6647,7 @@ var VERSION = __webpack_require__(477).version;
 
 var punycode;
 try {
-  punycode = __webpack_require__(213);
+  punycode = __webpack_require__(815);
 } catch(e) {
   console.warn("tough-cookie: can't load punycode; won't use punycode for domain normalization");
 }
@@ -26402,7 +26404,7 @@ var VERSION = __webpack_require__(459);
 
 var punycode;
 try {
-  punycode = __webpack_require__(213);
+  punycode = __webpack_require__(815);
 } catch(e) {
   console.warn("tough-cookie: can't load punycode; won't use punycode for domain normalization");
 }
@@ -30003,7 +30005,7 @@ module.exports = require("fs");
 
 
 
-var Punycode = __webpack_require__(213);
+var Punycode = __webpack_require__(815);
 
 
 var internals = {};
@@ -32029,7 +32031,12 @@ module.exports = HARError
 
 
 /***/ }),
-/* 815 */,
+/* 815 */
+/***/ (function(module) {
+
+module.exports = require("punycode");
+
+/***/ }),
 /* 816 */,
 /* 817 */,
 /* 818 */,

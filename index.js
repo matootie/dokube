@@ -1,3 +1,4 @@
+const io = require('io');
 const process = require('process');
 const request = require('request-promise-native');
 const core = require('@actions/core');
