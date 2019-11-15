@@ -69,7 +69,7 @@ async function run() {
             Authorization: `Bearer ${accessToken}`
         },
         qs: {
-            expiry: expirationTime
+            expiry_seconds: expirationTime
         },
         json: true
     };

@@ -20,7 +20,7 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using Dig
 
 ```yaml
 - name: Set up kubectl
-  uses: uniappca/dokube@v1.1.0
+  uses: uniappca/dokube@v1.1.1
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
