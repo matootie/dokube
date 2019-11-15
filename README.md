@@ -1,7 +1,6 @@
 # DigitalOcean Kubernetes GitHub Action
-> dokube
 
-Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using doctl, then configures kubectl and exposes to path for future use.
+Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using DigitalOcean API v2, then configures kubectl and exposes to path for future use.
 
 ## Inputs
 
@@ -13,11 +12,15 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using doc
 
 **Required** The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster. ![](https://i.imgur.com/ZwJM4ZU.png)
 
+### `expirationTime`
+
+*Optional* Amount of time, in seconds, that the generated DigitalOcean Token has to live. Defaults to 700.
+
 ## Example usage
 
 ```yaml
 - name: Set up kubectl
-  uses: uniappca/dokube@v1.0.0
+  uses: uniappca/dokube@v1.1.0
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
