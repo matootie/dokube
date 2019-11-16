@@ -14,7 +14,7 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using Dig
 
 ### `expirationTime`
 
-*Optional* Amount of time, in seconds, that the generated DigitalOcean Token has to live. Defaults to 700.
+*Optional* Amount of time, in seconds, that the generated DigitalOcean Token has to live. Defaults to 600.
 
 ## Example usage
 
@@ -24,7 +24,7 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using Dig
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
-    expirationTime: 700
+    expirationTime: 300
 
 - name: Get nodes
   run: kubectl get nodes
