@@ -32,9 +32,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/uniappca/dokube/issues"
+    "url": "https://github.com/matootie/dokube/issues"
   },
-  "homepage": "https://github.com/uniappca/dokube#readme",
+  "homepage": "https://github.com/matootie/dokube#readme",
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/exec": "^1.0.1",
