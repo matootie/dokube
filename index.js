@@ -1,8 +1,7 @@
-const fs =require('fs');
+const fs = require('fs');
 const process = require('process');
 const request = require('request-promise-native');
 const core = require('@actions/core');
-const exec = require('@actions/exec');
 const io = require('@actions/io');
 const tc = require('@actions/tool-cache');
 
@@ -45,15 +44,16 @@ async function run() {
     const accessToken = core.getInput('personalAccessToken', { required: true });
     const clusterName = core.getInput('clusterName', { required: true });
     const expirationTime = core.getInput('expirationTime', { required: true });
+    const namespaceName = core.getInput('namespace', { required: true });
 
     // Request list of clusters and retrieve cluster ID and region.
     const listClustersOptions = {
-        baseUrl: DOBaseUrl,
-        uri: '/v2/kubernetes/clusters',
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        },
-        json: true
+      baseUrl: DOBaseUrl,
+      uri: '/v2/kubernetes/clusters',
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      json: true
     };
     const clusters = await request(listClustersOptions);
     const cluster = clusters['kubernetes_clusters'].find(c => c.name === clusterName);
@@ -63,15 +63,15 @@ async function run() {
 
     // Get cluster credentials.
     const getCredentialsOptions = {
-        baseUrl: DOBaseUrl,
-        uri: `/v2/kubernetes/clusters/${clusterID}/credentials`,
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        },
-        qs: {
-            expiry_seconds: expirationTime
-        },
-        json: true
+      baseUrl: DOBaseUrl,
+      uri: `/v2/kubernetes/clusters/${clusterID}/credentials`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      qs: {
+        expiry_seconds: expirationTime
+      },
+      json: true
     };
     const credentials = await request(getCredentialsOptions);
     const server = credentials['server']
@@ -81,36 +81,37 @@ async function run() {
     // Construct a kubeconfig object.
     const fullName = `do-${region}-${clusterName}`;
     const kubeconfig = {
-        apiVersion: 'v1',
-        clusters: [
-            {
-                cluster: {
-                    'certificate-authority-data': certAuthData,
-                    server: server,
-                },
-                name: fullName
-            }
-        ],
-        contexts: [
-            {
-                context: {
-                    cluster: fullName,
-                    user: `${fullName}-admin`
-                },
-                name: fullName
-            }
-        ],
-        'current-context': fullName,
-        kind: 'Config',
-        preferences: {},
-        users: [
-            {
-                name: `${fullName}-admin`,
-                user: {
-                    token: kubeconfigToken
-                }
-            }
-        ]
+      apiVersion: 'v1',
+      clusters: [
+        {
+          cluster: {
+            'certificate-authority-data': certAuthData,
+            server: server,
+          },
+          name: fullName
+        }
+      ],
+      contexts: [
+        {
+          context: {
+            cluster: fullName,
+            namespace: namespaceName,
+            user: `${fullName}-admin`
+          },
+          name: fullName
+        }
+      ],
+      'current-context': fullName,
+      kind: 'Config',
+      preferences: {},
+      users: [
+        {
+          name: `${fullName}-admin`,
+          user: {
+            token: kubeconfigToken
+          }
+        }
+      ]
     };
 
     // Save the kubeconfig object.

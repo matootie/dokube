@@ -1,19 +1,23 @@
-name: 'DigitalOcean Kubernetes'
-description: 'Use DigitalOcean Kubernetes in GitHub Actions'
+name: "DigitalOcean Kubernetes"
+description: "Use DigitalOcean Kubernetes in GitHub Actions"
 inputs:
   personalAccessToken:
-    description: 'DigitalOcean Personal Access Token; Used to fetch latest Kubernetes Config.'
+    description: "DigitalOcean Personal Access Token; Used to fetch latest Kubernetes Config."
     required: true
   clusterName:
-    description: 'The name of the DigitalOcean Kubernetes cluster that you plan to work with.'
+    description: "The name of the DigitalOcean Kubernetes cluster that you plan to work with."
     required: true
   expirationTime:
-    description: 'How long the kubeconfig should stay valid for.'
+    description: "How long the kubeconfig should stay valid for."
     required: false
     default: 600
+  namespace:
+    description: "The Kubernetes namespace to operate under."
+    required: false
+    default: "default"
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
 branding:
-  icon: 'cloud'
-  color: 'blue'
+  icon: "cloud"
+  color: "blue"
