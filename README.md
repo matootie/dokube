@@ -10,7 +10,7 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using Dig
 
 ### `clusterName`
 
-**Required** The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster. ![](https://i.imgur.com/ZwJM4ZU.png)
+**Required** The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster. ![Example cluster name field](https://i.imgur.com/ZwJM4ZU.png)
 
 ### `expirationTime`
 
@@ -20,7 +20,7 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using Dig
 
 ```yaml
 - name: Set up kubectl
-  uses: matootie/dokube@v1.1.2
+  uses: matootie/dokube@v1.2.0
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
