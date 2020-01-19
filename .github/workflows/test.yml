@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-      if: github.repository == "matootie/dokube"
+      if: github.repository == 'matootie/dokube'
     - uses: ./
       with:
         personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
