@@ -45,6 +45,7 @@ async function run() {
     const clusterName = core.getInput('clusterName', { required: true });
     const expirationTime = core.getInput('expirationTime', { required: true });
     const namespaceName = core.getInput('namespace', { required: true });
+    const kubectlVersion = core.getInput('version', { required: true });
 
     // Request list of clusters and retrieve cluster ID and region.
     const listClustersOptions = {
@@ -119,11 +120,11 @@ async function run() {
     fs.writeFileSync(`${workdir}/kubeconfig`, formattedConfig);
 
     // Download and install kubectl.
-    const kubectl = await tc.downloadTool("https://storage.googleapis.com/kubernetes-release/release/v1.16.0/bin/linux/amd64/kubectl");
+    const kubectl = await tc.downloadTool(`https://storage.googleapis.com/kubernetes-release/release/${kubectlVersion}/bin/linux/amd64/kubectl`);
     await io.mv(kubectl, `${workdir}/kubectl`);
 
     // Cache kubectl and kubeconfig.
-    const cachedPath = await tc.cacheDir(workdir, 'kubectl', 'v1.16.0');
+    const cachedPath = await tc.cacheDir(workdir, 'kubectl', kubectlVersion);
 
     // Set KUBECONFIG environment variable.
     core.exportVariable('KUBECONFIG', `${cachedPath}/kubeconfig`);

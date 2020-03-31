@@ -15,6 +15,10 @@ inputs:
     description: "The Kubernetes namespace to operate under."
     required: false
     default: "default"
+  version:
+    description: "The kubectl version to use."
+    required: false
+    default: "1.16.0"
 runs:
   using: "node12"
   main: "dist/index.js"
