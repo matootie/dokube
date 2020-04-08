@@ -15,4 +15,7 @@ jobs:
       with:
         personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
         clusterName: yoiksoft
+        expirationTime: 90
+        namespace: default
+        version: 1.17.4
     - run: kubectl get nodes
