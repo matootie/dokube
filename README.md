@@ -16,15 +16,20 @@ Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using Dig
 
 *Optional* Amount of time, in seconds, that the generated DigitalOcean Token has to live. Defaults to 600.
 
+### `version`
+
+*Optional* The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`.
+
 ## Example usage
 
 ```yaml
 - name: Set up kubectl
-  uses: matootie/dokube@v1.2.0
+  uses: matootie/dokube@v1.3.0
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
-    expirationTime: 300
+    expirationTime: "300"
+    version: "1.17.4"
 
 - name: Get nodes
   run: kubectl get nodes

@@ -10,7 +10,7 @@ inputs:
   expirationTime:
     description: "How long the kubeconfig should stay valid for."
     required: false
-    default: 600
+    default: "600"
   namespace:
     description: "The Kubernetes namespace to operate under."
     required: false
