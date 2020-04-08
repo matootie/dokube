@@ -1,14 +1,12 @@
-name: "test-local"
+name: "Run locally"
 on:
   pull_request:
   push:
     branches:
       - master
       - 'releases/*'
-    paths: 
-      - dist/index.js
 jobs:
-  test:
+  run:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -16,5 +14,5 @@ jobs:
     - uses: ./
       with:
         personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
-        clusterName: universe
+        clusterName: yoiksoft
     - run: kubectl get nodes
