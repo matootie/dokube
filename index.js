@@ -123,14 +123,11 @@ async function run() {
     const kubectl = await tc.downloadTool(`https://storage.googleapis.com/kubernetes-release/release/v${kubectlVersion}/bin/linux/amd64/kubectl`);
     await io.mv(kubectl, `${workdir}/kubectl`);
 
-    // Cache kubectl and kubeconfig.
-    const cachedPath = await tc.cacheDir(workdir, 'kubectl', `v${kubectlVersion}`);
-
     // Set KUBECONFIG environment variable.
-    core.exportVariable('KUBECONFIG', `${cachedPath}/kubeconfig`);
+    core.exportVariable('KUBECONFIG', `${workdir}/kubeconfig`);
 
     // Add kubectl to PATH.
-    core.addPath(`${cachedPath}/kubectl`);
+    core.addPath(`${workdir}/kubectl`);
   }
   catch (error) {
     core.setFailed(error.message);

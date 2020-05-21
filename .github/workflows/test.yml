@@ -19,3 +19,4 @@ jobs:
         namespace: default
         version: 1.17.4
     - run: kubectl get nodes
+    - run: kubectl top nodes
