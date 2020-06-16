@@ -2529,15 +2529,13 @@ async function run() {
 
     // Download and install kubectl.
     const spec = kubectlSpec(kubectlVersion);
-    const kubectlDirectory = tc.find(
+    let kubectlDirectory = tc.find(
       "kubectl",
       kubectlVersion,
       spec.architecture);
-    console.log(`Directory: ${kubectlDirectory}`);
     if (!kubectlDirectory) {
-      console.log("Downloading kubectl");
       const kubectl = await tc.downloadTool(spec.url);
-      const kubectlDirectory = await tc.cacheFile(
+      kubectlDirectory = await tc.cacheFile(
         kubectl,
         spec.executable,
         "kubectl",
