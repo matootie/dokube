@@ -1,36 +1,74 @@
 # DigitalOcean Kubernetes GitHub Action
 
-Fetches the latest kubeconfig for your DigitalOcean Kubernetes Cluster using DigitalOcean API v2, then configures kubectl and exposes to path for future use.
+Fetches the config for your DigitalOcean Kubernetes Cluster, then installs and configures `kubectl`, exposing it to path for future use!
+
+**Runs on Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.15, Windows 2016 and Windows 2019. As well as self hosted Linux runners on arm64, amd64 or s390x**
+
+[![GitHub Release](https://img.shields.io/github/v/release/matootie/dokube)](https://github.com/matootie/dokube/releases/latest)
+
+For help updating, view the [change logs](https://github.com/matootie/dokube/releases).
+
+## Runs on
+
+| Type                | Systems | Note |
+| --- | --- | --- |
+| GitHub Runners      | `ubuntu-16.04`, `ubuntu-18.04`, `ubuntu-20.04`, `macos-10.15`, `windows-2016`, `windows-2019` | _All available GitHub hosted runners._ |
+| Self-Hosted Runners | `linux-amd64`, `linux-arm64`, `linux-s390x`, `macOS-x64`, `windows-x64` | _Not tested, but in theory should work as long as `kubectl` is available for your system._ |
 
 ## Inputs
 
-### `personalAccessToken`
-
-**Required** A DigitalOcean Personal Access Token to use with doctl. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://www.digitalocean.com/docs/api/create-personal-access-token/)
-
-### `clusterName`
-
-**Required** The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster. ![Example cluster name field](https://i.imgur.com/ZwJM4ZU.png)
-
-### `expirationTime`
-
-*Optional* Amount of time, in seconds, that the generated DigitalOcean Token has to live. Defaults to 600.
-
-### `version`
-
-*Optional* The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`.
+| Name                  | Requirement       | Description |
+| --------------------- | ----------------- | ------------|
+| `personalAccessToken` | **Required**      | A DigitalOcean Personal Access Token to use for authentication, when fetching cluster credentials from DigitalOcean. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://www.digitalocean.com/docs/api/create-personal-access-token/).
+| `clusterName`         | **Required**      | The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster.
+| `version`             | ***Optional***    | The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`. _See [example](#specifying-a-specific-kubectl-version) below_.
+| `expirationTime`      | ***Optional***    | Amount of time, in seconds, that the generated DigitalOcean Token has to live. Typically should be slightly longer than the amount of time your job will run. Defaults to 600. _See [example](#specifying-a-custom-expiration-time) below_.
 
 ## Example usage
 
+#### Simple, minimal usage...
+
 ```yaml
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.1
+  uses: matootie/dokube@v1.3.2
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
-    expirationTime: "300"
+
+- name: Get nodes
+  run: kubectl get nodes
+```
+
+This will setup `kubectl` configured with your DigitalOcean Kubernetes cluster. After that you're free to use `kubectl` as you wish!
+
+#### Specifying a specific kubectl version...
+
+```yaml
+- name: Set up kubectl
+  uses: matootie/dokube@v1.3.2
+  with:
+    personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
+    clusterName: my-fabulous-cluster
     version: "1.17.4"
 
 - name: Get nodes
   run: kubectl get nodes
 ```
+
+If you would like to install a specific version of `kubectl`, you can specify it with the `version` input.
+
+#### Specifying a custom expiration time...
+
+```yaml
+- name: Set up kubectl
+  uses: matootie/dokube@v1.3.2
+  with:
+    personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
+    clusterName: my-fabulous-cluster
+    expirationTime: "1200"
+
+- name: Get nodes
+  run: kubectl get nodes
+```
+
+The generated Kubernetes config is set to only last a short amount of time, as it is only expected to be used for the duration of the job. If you would like to specify a shorter or larger time, better tailored to the average length of your job, you can do so with the `expirationTime` input.
