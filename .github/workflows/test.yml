@@ -1,10 +1,9 @@
 name: "Run locally"
 on:
-  pull_request:
   push:
-    branches:
-      - master
-      - 'releases/*'
+    paths:
+      - ".github/workflows/test.yml"
+      - "dist/index.js"
 jobs:
   run:
     runs-on: ${{ matrix.os }}

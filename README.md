@@ -2,8 +2,6 @@
 
 Fetches the config for your DigitalOcean Kubernetes Cluster, then installs and configures `kubectl`, exposing it to path for future use!
 
-**Runs on Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04, macOS 10.15, Windows 2016 and Windows 2019. As well as self hosted Linux runners on arm64, amd64 or s390x**
-
 [![GitHub Release](https://img.shields.io/github/v/release/matootie/dokube)](https://github.com/matootie/dokube/releases/latest)
 
 For help updating, view the [change logs](https://github.com/matootie/dokube/releases).
