@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 const request = require("request-promise-native");
 const core = require("@actions/core");
 const io = require("@actions/io");
@@ -104,7 +103,7 @@ async function run() {
     if (!kubectlDirectory) {
       const kubectl = await tc.downloadTool(spec.url);
       const kubectlDirectory = await tc.cacheFile(
-        path.dirname(kubectl),
+        kubectl,
         spec.executable,
         "kubectl",
         kubectlVersion,

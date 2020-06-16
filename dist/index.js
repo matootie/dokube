@@ -2432,7 +2432,6 @@ module.exports = {
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 const fs = __webpack_require__(747);
-const path = __webpack_require__(622);
 const request = __webpack_require__(117);
 const core = __webpack_require__(470);
 const io = __webpack_require__(1);
@@ -2537,7 +2536,7 @@ async function run() {
     if (!kubectlDirectory) {
       const kubectl = await tc.downloadTool(spec.url);
       const kubectlDirectory = await tc.cacheFile(
-        path.dirname(kubectl),
+        kubectl,
         spec.executable,
         "kubectl",
         kubectlVersion,
