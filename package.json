@@ -1,10 +1,8 @@
 {
   "name": "dokube",
-  "version": "1.3.1",
   "description": "Use DigitalOcean Kubernetes in GitHub Actions",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint index.js",
     "package": "ncc build index.js -o dist"
   },
   "repository": {
@@ -40,14 +38,12 @@
     "@actions/exec": "^1.0.3",
     "@actions/io": "^1.0.2",
     "@actions/tool-cache": "^1.3.0",
-    "acorn": "^7.1.1",
     "request-promise-native": "^1.0.8"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.21.0",
-    "eslint": "^6.8.0",
-    "jest": "^24.9.0",
-    "minimist": ">=1.2.2",
-    "kind-of": ">=6.0.3"
+    "@zeit/ncc": "^0.21.0"
+  },
+  "jshintConfig": {
+    "esversion": 10
   }
 }
