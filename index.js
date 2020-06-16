@@ -102,6 +102,7 @@ async function run() {
       spec.architecture);
     if (!kubectlDirectory) {
       const kubectl = await tc.downloadTool(spec.url);
+      fs.chmodSync(kubectl, 0o777);
       kubectlDirectory = await tc.cacheFile(
         kubectl,
         spec.executable,
