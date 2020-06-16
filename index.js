@@ -100,7 +100,9 @@ async function run() {
       "kubectl",
       kubectlVersion,
       spec.architecture);
+    console.log(`Directory: ${kubectlDirectory}`);
     if (!kubectlDirectory) {
+      console.log("Downloading kubectl");
       const kubectl = await tc.downloadTool(spec.url);
       const kubectlDirectory = await tc.cacheFile(
         kubectl,

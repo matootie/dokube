@@ -8,6 +8,7 @@ on:
 jobs:
   run:
     runs-on: ${{ matrix.os }}
+    if: ${{ always() }}
     strategy:
       matrix:
         os:
