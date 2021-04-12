@@ -9,18 +9,19 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 ## Runs on
 
 | Type                | Systems | Note |
-| --- | --- | --- |
+|:--- |:--- |:--- |
 | GitHub Runners      | `ubuntu-16.04`, `ubuntu-18.04`, `ubuntu-20.04`, `macos-10.15`, `windows-2016`, `windows-2019` | _All available GitHub hosted runners._ |
 | Self-Hosted Runners | `linux-amd64`, `linux-arm64`, `linux-s390x`, `macOS-x64`, `windows-x64` | _Not tested, but in theory should work as long as `kubectl` is available for your system._ |
 
 ## Inputs
 
 | Name                  | Requirement       | Description |
-| --------------------- | ----------------- | ------------|
+|:--------------------- |:----------------- |:------------|
 | `personalAccessToken` | **Required**      | A DigitalOcean Personal Access Token to use for authentication, when fetching cluster credentials from DigitalOcean. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://www.digitalocean.com/docs/api/create-personal-access-token/).
 | `clusterName`         | **Required**      | The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster.
 | `version`             | ***Optional***    | The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`. _See [example](#specifying-a-specific-kubectl-version) below_.
 | `expirationTime`      | ***Optional***    | Amount of time, in seconds, that the generated DigitalOcean Token has to live. Typically should be slightly longer than the amount of time your job will run. Defaults to 600. _See [example](#specifying-a-custom-expiration-time) below_.
+| `namespace`           | ***Optional***    | The Kubernetes namespace to operate under. Defaults to `default`.
 
 ## Example usage
 
@@ -28,7 +29,7 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 
 ```yaml
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.3
+  uses: matootie/dokube@v1.3.4
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
@@ -43,7 +44,7 @@ This will setup `kubectl` configured with your DigitalOcean Kubernetes cluster. 
 
 ```yaml
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.3
+  uses: matootie/dokube@v1.3.4
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
@@ -59,7 +60,7 @@ If you would like to install a specific version of `kubectl`, you can specify it
 
 ```yaml
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.3
+  uses: matootie/dokube@v1.3.4
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
