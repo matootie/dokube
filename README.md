@@ -17,7 +17,7 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 
 | Name                  | Requirement       | Description |
 |:--------------------- |:----------------- |:------------|
-| `personalAccessToken` | **Required**      | A DigitalOcean Personal Access Token to use for authentication, when fetching cluster credentials from DigitalOcean. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://www.digitalocean.com/docs/api/create-personal-access-token/).
+| `personalAccessToken` | **Required**      | A DigitalOcean Personal Access Token to use for authentication, when fetching cluster credentials from DigitalOcean. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://docs.digitalocean.com/reference/api/create-personal-access-token/).
 | `clusterName`         | **Required**      | The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster.
 | `version`             | ***Optional***    | The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`. _See [example](#specifying-a-specific-kubectl-version) below_.
 | `expirationTime`      | ***Optional***    | Amount of time, in seconds, that the generated DigitalOcean Token has to live. Typically should be slightly longer than the amount of time your job will run. Defaults to 600. _See [example](#specifying-a-custom-expiration-time) below_.
