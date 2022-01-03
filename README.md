@@ -2,6 +2,8 @@
 
 Fetches the config for your DigitalOcean Kubernetes Cluster, then installs and configures `kubectl`, exposing it to path for future use!
 
+**Disclaimer:** As of late, I haven't been using much Kubernetes in my daily projects. I've been focusing more on developing with serverless functions. Because of this, I haven't been making use of this GitHub Action either, so I haven't been able to find any bugs or feature ideas. Consider this project relatively unmaintained. That is to say, if you *do* make use of it and would like to submit and Issue outlining a problem you're facing, or a feature you want to implement, I will definitely be around to address those. Thank you.
+
 [![GitHub Release](https://img.shields.io/github/v/release/matootie/dokube)](https://github.com/matootie/dokube/releases/latest)
 
 For help updating, view the [change logs](https://github.com/matootie/dokube/releases).
