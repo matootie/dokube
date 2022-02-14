@@ -90,6 +90,6 @@ export async function run() {
     // Done!
     console.log("Done!")
   } catch (error: any) {
-    core.setFailed(error.message)
+    core.setFailed(error)
   }
 }
