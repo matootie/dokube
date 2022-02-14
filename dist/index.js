@@ -9803,15 +9803,14 @@ async function listClusters({ accessToken, }) {
             Authorization: `Bearer ${accessToken}`,
         },
     });
+    console.log(clusters);
     // Return the clusters.
-    return {
-        items: clusters || [],
-    };
+    return clusters || [];
 }
 exports.listClusters = listClusters;
 async function getClusterByName({ clusterName, accessToken, }) {
     // List the clusters.
-    const { items: clusters } = await listClusters({ accessToken });
+    const clusters = await listClusters({ accessToken });
     // Find the cluster by name.
     console.log("Finding cluster by name...");
     const cluster = clusters.find((c) => c.name === clusterName);
