@@ -29,4 +29,3 @@ jobs:
           namespace: default
           version: 1.21.9
       - run: kubectl get nodes
-      - run: kubectl top nodes
