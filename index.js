@@ -1,5 +1,5 @@
 const fs = require("fs");
-const request = require("request-promise-native");
+const axios = require("axios").default;
 const core = require("@actions/core");
 const io = require("@actions/io");
 const tc = require("@actions/tool-cache");
@@ -19,34 +19,33 @@ async function run() {
     const namespaceName = core.getInput("namespace");
     const kubectlVersion = core.getInput("version");
 
-    // Request list of clusters and retrieve cluster ID and region.
-    const listClustersOptions = {
-      baseUrl: DOBaseUrl,
-      uri: "/v2/kubernetes/clusters",
+    // Get list of clusters and retrieve cluster ID and region.
+    const { data: clusters } = await axios({
+      baseURL: DOBaseUrl,
+      url: "/v2/kubernetes/clusters",
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
       },
-      json: true
-    };
-    const clusters = await request(listClustersOptions);
-    const cluster = clusters.kubernetes_clusters.find(c => c.name === clusterName);
-    if (!cluster) throw new Error(`No cluster found with name: "${clusterName}"`);
+    });
+    const cluster = clusters.kubernetes_clusters.find(
+      (c) => c.name === clusterName
+    );
+    if (!cluster)
+      throw new Error(`No cluster found with name: "${clusterName}"`);
     const clusterID = cluster.id;
     const region = cluster.region;
 
     // Get cluster credentials.
-    const getCredentialsOptions = {
-      baseUrl: DOBaseUrl,
-      uri: `/v2/kubernetes/clusters/${clusterID}/credentials`,
+    const { data: credentials } = await axios({
+      baseURL: DOBaseUrl,
+      url: `/v2/kubernetes/clusters/${clusterID}/credentials`,
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
       },
-      qs: {
-        expiry_seconds: expirationTime
+      params: {
+        expiry_seconds: expirationTime,
       },
-      json: true
-    };
-    const credentials = await request(getCredentialsOptions);
+    });
     const server = credentials.server;
     const certAuthData = credentials.certificate_authority_data;
     const kubeconfigToken = credentials.token;
@@ -61,18 +60,18 @@ async function run() {
             "certificate-authority-data": certAuthData,
             server: server,
           },
-          name: fullName
-        }
+          name: fullName,
+        },
       ],
       contexts: [
         {
           context: {
             cluster: fullName,
             namespace: namespaceName,
-            user: `${fullName}-admin`
+            user: `${fullName}-admin`,
           },
-          name: fullName
-        }
+          name: fullName,
+        },
       ],
       "current-context": fullName,
       kind: "Config",
@@ -81,10 +80,10 @@ async function run() {
         {
           name: `${fullName}-admin`,
           user: {
-            token: kubeconfigToken
-          }
-        }
-      ]
+            token: kubeconfigToken,
+          },
+        },
+      ],
     };
 
     // Save the kubeconfig object.
@@ -99,7 +98,8 @@ async function run() {
     let kubectlDirectory = tc.find(
       "kubectl",
       kubectlVersion,
-      spec.architecture);
+      spec.architecture
+    );
     if (!kubectlDirectory) {
       const kubectl = await tc.downloadTool(spec.url);
       fs.chmodSync(kubectl, 0o777);
@@ -112,8 +112,7 @@ async function run() {
       );
     }
     core.addPath(kubectlDirectory);
-  }
-  catch (error) {
+  } catch (error) {
     core.setFailed(error.message);
   }
 }
