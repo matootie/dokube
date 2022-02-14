@@ -21,14 +21,16 @@ import { getClusterByName, getClusterCredentials } from "@utils/do"
 export async function run() {
   try {
     // Create the working directory.
+    console.log("Creating working directory...")
     await io.mkdirP(WORKDIR)
 
     // Get user input.
-    const accessToken = core.getInput("personalAccessToken", { required: true })
-    const clusterName = core.getInput("clusterName", { required: true })
-    const expirationTime = core.getInput("expirationTime", { required: true })
-    const namespaceName = core.getInput("namespace", { required: true })
-    const kubectlVersion = core.getInput("version", { required: true })
+    console.log("Fetching user inputs...")
+    const accessToken = core.getInput("personalAccessToken")
+    const clusterName = core.getInput("clusterName")
+    const expirationTime = core.getInput("expirationTime")
+    const namespaceName = core.getInput("namespace")
+    const kubectlVersion = core.getInput("version")
 
     // Get the cluster by name.
     const cluster = await getClusterByName({
@@ -58,15 +60,18 @@ export async function run() {
     })
 
     // Save the Kubernetes CLI config.
+    console.log("Writing Kubernetes CLI config to disk...")
     writeFileSync(`${WORKDIR}/kubeconfig`, JSON.stringify(kubeconfig, null, 2))
 
     // Set KUBECONFIG environment variable.
+    console.log("Setting Kubernetes CLI config as default...")
     core.exportVariable("KUBECONFIG", `${WORKDIR}/kubeconfig`)
 
     // Download and install Kubernetes CLI.
     const spec = kubectlSpec(kubectlVersion)
     let kubectlDirectory = tc.find("kubectl", kubectlVersion, spec.architecture)
     if (!kubectlDirectory) {
+      console.log("Downloading Kubernetes CLI...")
       const kubectl = await tc.downloadTool(spec.url)
       chmodSync(kubectl, 0o777)
       kubectlDirectory = await tc.cacheFile(
@@ -79,7 +84,11 @@ export async function run() {
     }
 
     // Add Kubernetes CLI to PATH.
+    console.log("Adding Kubernetes CLI to path...")
     core.addPath(kubectlDirectory)
+
+    // Done!
+    console.log("Done!")
   } catch (error: any) {
     core.setFailed(error.message)
   }

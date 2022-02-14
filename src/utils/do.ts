@@ -39,6 +39,7 @@ interface ListClustersOutput {
 export async function listClusters({
   accessToken,
 }: ListClustersInput): Promise<ListClustersOutput> {
+  console.log("Listing all clusters...")
   // Request the API.
   const { data: clusters } = await axios({
     baseURL: DO_BASE_URL,
@@ -67,6 +68,7 @@ export async function getClusterByName({
   // List the clusters.
   const { items: clusters } = await listClusters({ accessToken })
   // Find the cluster by name.
+  console.log("Finding cluster by name...")
   const cluster = clusters.find((c) => c.name === clusterName)
   // Return the cluster.
   return cluster
@@ -85,6 +87,8 @@ export async function getClusterCredentials({
   accessToken,
   expirationTime,
 }: GetClusterCredentialsInput): Promise<DOKubernetesClusterCredentials> {
+  console.log("Getting cluster credentials...")
+  // Get cluster credentials.
   const { data: credentials } = await axios({
     baseURL: DO_BASE_URL,
     url: `/kubernetes/clusters/${cluster.id}/credentials`,
@@ -95,5 +99,6 @@ export async function getClusterCredentials({
       expiry_seconds: expirationTime,
     },
   })
+  // Return the credentials.
   return credentials as DOKubernetesClusterCredentials
 }

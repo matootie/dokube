@@ -58,6 +58,7 @@ export function constructKubeconfig({
   preferences = {},
   token,
 }: ConstructKubeConfigInput): KubeConfig {
+  console.log("Constructing Kubernetes CLI config...")
   return {
     apiVersion: "v1",
     clusters: [
@@ -103,6 +104,7 @@ interface KubectlSpecOutput {
   url: string
 }
 export function kubectlSpec(version: string): KubectlSpecOutput {
+  console.log("Determining Kubernetes CLI specifications...")
   // Get the OS type and architecture.
   const os_type = type()
   const os_arch = arch()
