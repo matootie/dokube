@@ -4,8 +4,6 @@ Fetches the config for your DigitalOcean Kubernetes Cluster, then installs and c
 
 **Disclaimer:** As of late, I haven't been using much Kubernetes in my daily projects. I've been focusing more on developing with serverless functions. Because of this, I haven't been making use of this GitHub Action either, so I haven't been able to find any bugs or feature ideas. Consider this project relatively unmaintained. That is to say, if you _do_ make use of it and would like to submit and Issue outlining a problem you're facing, or a feature you want to implement, I will definitely be around to address those. Thank you.
 
-[![GitHub Release](https://img.shields.io/github/v/release/matootie/dokube)](https://github.com/matootie/dokube/releases/latest)
-
 For help updating, view the [change logs](https://github.com/matootie/dokube/releases).
 
 ## Runs on
@@ -27,47 +25,53 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 
 ## Example usage
 
-#### Simple, minimal usage...
+### Simple, minimal usage
 
 ```yaml
+# Set up the Kubernetes CLI with your DigitalOcean Kubernetes cluster.
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.4
+  uses: matootie/dokube@v1.4.0
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
 
+# Run any kubectl commands you want!
 - name: Get nodes
   run: kubectl get nodes
 ```
 
 This will setup `kubectl` configured with your DigitalOcean Kubernetes cluster. After that you're free to use `kubectl` as you wish!
 
-#### Specifying a specific kubectl version...
+### Specifying a specific kubectl version
 
 ```yaml
+# Set up the Kubernetes CLI with your DigitalOcean Kubernetes cluster.
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.4
+  uses: matootie/dokube@v1.4.0
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
-    version: "1.17.4"
+    version: "1.20.15"
 
+# Run any kubectl commands you want!
 - name: Get nodes
   run: kubectl get nodes
 ```
 
 If you would like to install a specific version of `kubectl`, you can specify it with the `version` input.
 
-#### Specifying a custom expiration time...
+### Specifying a custom expiration time
 
 ```yaml
+# Set up the Kubernetes CLI with your DigitalOcean Kubernetes cluster.
 - name: Set up kubectl
-  uses: matootie/dokube@v1.3.4
+  uses: matootie/dokube@v1.4.0
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
     expirationTime: "1200"
 
+# Run any kubectl commands you want!
 - name: Get nodes
   run: kubectl get nodes
 ```
