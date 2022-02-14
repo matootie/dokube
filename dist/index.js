@@ -9796,16 +9796,15 @@ const constants_1 = __nccwpck_require__(8593);
 async function listClusters({ accessToken, }) {
     console.log("Listing all clusters...");
     // Request the API.
-    const { data: clusters } = await (0, axios_1.default)({
+    const { data } = await (0, axios_1.default)({
         baseURL: constants_1.DO_BASE_URL,
         url: "/kubernetes/clusters",
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
     });
-    console.log(clusters);
     // Return the clusters.
-    return clusters || [];
+    return data.kubernetes_clusters || [];
 }
 exports.listClusters = listClusters;
 async function getClusterByName({ clusterName, accessToken, }) {

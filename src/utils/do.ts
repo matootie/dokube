@@ -38,16 +38,15 @@ export async function listClusters({
 }: ListClustersInput): Promise<DOKubernetesCluster[]> {
   console.log("Listing all clusters...")
   // Request the API.
-  const { data: clusters } = await axios({
+  const { data } = await axios({
     baseURL: DO_BASE_URL,
     url: "/kubernetes/clusters",
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   })
-  console.log(clusters)
   // Return the clusters.
-  return (clusters as DOKubernetesCluster[]) || []
+  return (data.kubernetes_clusters as DOKubernetesCluster[]) || []
 }
 
 /**
