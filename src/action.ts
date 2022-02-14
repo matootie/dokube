@@ -6,9 +6,9 @@
 import { chmodSync, writeFileSync } from "fs"
 
 // Actions imports.
-import core from "@actions/core"
-import io from "@actions/io"
-import tc from "@actions/tool-cache"
+import * as core from "@actions/core"
+import * as io from "@actions/io"
+import * as tc from "@actions/tool-cache"
 
 // Utility imports.
 import { constructKubeconfig, kubectlSpec } from "@utils/kubectl"

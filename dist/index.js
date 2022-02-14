@@ -9660,17 +9660,33 @@ module.exports = v4;
 /**
  * Main action runner.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 // Standard imports.
 const fs_1 = __nccwpck_require__(7147);
 // Actions imports.
-const core_1 = __importDefault(__nccwpck_require__(2186));
-const io_1 = __importDefault(__nccwpck_require__(7436));
-const tool_cache_1 = __importDefault(__nccwpck_require__(7784));
+const core = __importStar(__nccwpck_require__(2186));
+const io = __importStar(__nccwpck_require__(7436));
+const tc = __importStar(__nccwpck_require__(7784));
 // Utility imports.
 const kubectl_1 = __nccwpck_require__(7852);
 const constants_1 = __nccwpck_require__(8593);
@@ -9682,14 +9698,14 @@ async function run() {
     try {
         // Create the working directory.
         console.log("Creating working directory...");
-        await io_1.default.mkdirP(constants_1.WORKDIR);
+        await io.mkdirP(constants_1.WORKDIR);
         // Get user input.
         console.log("Fetching user inputs...");
-        const accessToken = core_1.default.getInput("personalAccessToken");
-        const clusterName = core_1.default.getInput("clusterName");
-        const expirationTime = core_1.default.getInput("expirationTime");
-        const namespaceName = core_1.default.getInput("namespace");
-        const kubectlVersion = core_1.default.getInput("version");
+        const accessToken = core.getInput("personalAccessToken");
+        const clusterName = core.getInput("clusterName");
+        const expirationTime = core.getInput("expirationTime");
+        const namespaceName = core.getInput("namespace");
+        const kubectlVersion = core.getInput("version");
         // Get the cluster by name.
         const cluster = await (0, do_1.getClusterByName)({
             clusterName,
@@ -9719,24 +9735,24 @@ async function run() {
         (0, fs_1.writeFileSync)(`${constants_1.WORKDIR}/kubeconfig`, JSON.stringify(kubeconfig, null, 2));
         // Set KUBECONFIG environment variable.
         console.log("Setting Kubernetes CLI config as default...");
-        core_1.default.exportVariable("KUBECONFIG", `${constants_1.WORKDIR}/kubeconfig`);
+        core.exportVariable("KUBECONFIG", `${constants_1.WORKDIR}/kubeconfig`);
         // Download and install Kubernetes CLI.
         const spec = (0, kubectl_1.kubectlSpec)(kubectlVersion);
-        let kubectlDirectory = tool_cache_1.default.find("kubectl", kubectlVersion, spec.architecture);
+        let kubectlDirectory = tc.find("kubectl", kubectlVersion, spec.architecture);
         if (!kubectlDirectory) {
             console.log("Downloading Kubernetes CLI...");
-            const kubectl = await tool_cache_1.default.downloadTool(spec.url);
+            const kubectl = await tc.downloadTool(spec.url);
             (0, fs_1.chmodSync)(kubectl, 0o777);
-            kubectlDirectory = await tool_cache_1.default.cacheFile(kubectl, spec.executable, "kubectl", kubectlVersion, spec.architecture);
+            kubectlDirectory = await tc.cacheFile(kubectl, spec.executable, "kubectl", kubectlVersion, spec.architecture);
         }
         // Add Kubernetes CLI to PATH.
         console.log("Adding Kubernetes CLI to path...");
-        core_1.default.addPath(kubectlDirectory);
+        core.addPath(kubectlDirectory);
         // Done!
         console.log("Done!");
     }
     catch (error) {
-        core_1.default.setFailed(error);
+        core.setFailed(error);
     }
 }
 exports.run = run;
