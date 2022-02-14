@@ -18,9 +18,9 @@ inputs:
   version:
     description: "The kubectl version to use."
     required: false
-    default: "1.16.0"
+    default: "1.21.9"
 runs:
-  using: "node12"
+  using: "node16"
   main: "dist/index.js"
 branding:
   icon: "cloud"

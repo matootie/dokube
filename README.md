@@ -2,7 +2,7 @@
 
 Fetches the config for your DigitalOcean Kubernetes Cluster, then installs and configures `kubectl`, exposing it to path for future use!
 
-**Disclaimer:** As of late, I haven't been using much Kubernetes in my daily projects. I've been focusing more on developing with serverless functions. Because of this, I haven't been making use of this GitHub Action either, so I haven't been able to find any bugs or feature ideas. Consider this project relatively unmaintained. That is to say, if you *do* make use of it and would like to submit and Issue outlining a problem you're facing, or a feature you want to implement, I will definitely be around to address those. Thank you.
+**Disclaimer:** As of late, I haven't been using much Kubernetes in my daily projects. I've been focusing more on developing with serverless functions. Because of this, I haven't been making use of this GitHub Action either, so I haven't been able to find any bugs or feature ideas. Consider this project relatively unmaintained. That is to say, if you _do_ make use of it and would like to submit and Issue outlining a problem you're facing, or a feature you want to implement, I will definitely be around to address those. Thank you.
 
 [![GitHub Release](https://img.shields.io/github/v/release/matootie/dokube)](https://github.com/matootie/dokube/releases/latest)
 
@@ -10,20 +10,20 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 
 ## Runs on
 
-| Type                | Systems | Note |
-|:--- |:--- |:--- |
-| GitHub Runners      | `ubuntu-16.04`, `ubuntu-18.04`, `ubuntu-20.04`, `macos-10.15`, `windows-2016`, `windows-2019` | _All available GitHub hosted runners._ |
-| Self-Hosted Runners | `linux-amd64`, `linux-arm64`, `linux-s390x`, `macOS-x64`, `windows-x64` | _Not tested, but in theory should work as long as `kubectl` is available for your system._ |
+| Type                | Systems                                                                                                   | Note                                                                                       |
+| :------------------ | :-------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
+| GitHub Runners      | `ubuntu-18.04`, `ubuntu-20.04`, `macos-10.15`, `macos-11`, `windows-2016`, `windows-2019`, `windows-2022` | _All available GitHub hosted runners._                                                     |
+| Self-Hosted Runners | `linux-amd64`, `linux-arm64`, `linux-s390x`, `macOS-x64`, `windows-x64`                                   | _Not tested, but in theory should work as long as `kubectl` is available for your system._ |
 
 ## Inputs
 
-| Name                  | Requirement       | Description |
-|:--------------------- |:----------------- |:------------|
-| `personalAccessToken` | **Required**      | A DigitalOcean Personal Access Token to use for authentication, when fetching cluster credentials from DigitalOcean. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://docs.digitalocean.com/reference/api/create-personal-access-token/).
-| `clusterName`         | **Required**      | The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster.
-| `version`             | ***Optional***    | The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`. _See [example](#specifying-a-specific-kubectl-version) below_.
-| `expirationTime`      | ***Optional***    | Amount of time, in seconds, that the generated DigitalOcean Token has to live. Typically should be slightly longer than the amount of time your job will run. Defaults to 600. _See [example](#specifying-a-custom-expiration-time) below_.
-| `namespace`           | ***Optional***    | The Kubernetes namespace to operate under. Defaults to `default`.
+| Name                  | Requirement    | Description                                                                                                                                                                                                                                                                                                            |
+| :-------------------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `personalAccessToken` | **Required**   | A DigitalOcean Personal Access Token to use for authentication, when fetching cluster credentials from DigitalOcean. Must be tied to the same account as the Kubernetes Cluster you are trying to operate on. For instructions, see [here](https://docs.digitalocean.com/reference/api/create-personal-access-token/). |
+| `clusterName`         | **Required**   | The name of the cluster you are trying to operate on. This was chosen during the _"Choose a name"_ step when originally creating the cluster.                                                                                                                                                                          |
+| `version`             | **_Optional_** | The kubectl version to use. Remember to omit "v" prefix, for example: `1.16.0`. Defaults to `1.16.0`. _See [example](#specifying-a-specific-kubectl-version) below_.                                                                                                                                                   |
+| `expirationTime`      | **_Optional_** | Amount of time, in seconds, that the generated DigitalOcean Token has to live. Typically should be slightly longer than the amount of time your job will run. Defaults to 600. _See [example](#specifying-a-custom-expiration-time) below_.                                                                            |
+| `namespace`           | **_Optional_** | The Kubernetes namespace to operate under. Defaults to `default`.                                                                                                                                                                                                                                                      |
 
 ## Example usage
 
