@@ -1,3 +1,3 @@
 import { run } from "@app"
 
-run()
+run().catch(console.error)
