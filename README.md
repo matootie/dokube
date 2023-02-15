@@ -10,7 +10,7 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 
 | Type                | Systems                                                                                                   | Note                                                                                       |
 | :------------------ | :-------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| GitHub Runners      | `ubuntu-18.04`, `ubuntu-20.04`, `macos-10.15`, `macos-11`, `windows-2016`, `windows-2019`, `windows-2022` | _All available GitHub hosted runners._                                                     |
+| GitHub Runners      | `ubuntu-20.04`, `ubuntu-22.04`, `macos-11`, `macos-12`, `windows-2019`, `windows-2022` | _All available GitHub hosted runners._                                                     |
 | Self-Hosted Runners | `linux-amd64`, `linux-arm64`, `linux-s390x`, `macOS-x64`, `windows-x64`                                   | _Not tested, but in theory should work as long as `kubectl` is available for your system._ |
 
 ## Inputs
