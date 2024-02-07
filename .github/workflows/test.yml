@@ -28,7 +28,7 @@ jobs:
       - uses: ./
         with:
           personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
-          clusterName: matootie
+          clusterName: ${{ secrets.CLUSTER_NAME }}
           expirationTime: 90
           namespace: default
           version: ${{ matrix.version }}

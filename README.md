@@ -30,7 +30,7 @@ For help updating, view the [change logs](https://github.com/matootie/dokube/rel
 ```yaml
 # Set up the Kubernetes CLI with your DigitalOcean Kubernetes cluster.
 - name: Set up kubectl
-  uses: matootie/dokube@v1.4.0
+  uses: matootie/dokube@v1.4.1
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
@@ -47,7 +47,7 @@ This will setup `kubectl` configured with your DigitalOcean Kubernetes cluster. 
 ```yaml
 # Set up the Kubernetes CLI with your DigitalOcean Kubernetes cluster.
 - name: Set up kubectl
-  uses: matootie/dokube@v1.4.0
+  uses: matootie/dokube@v1.4.1
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
@@ -65,7 +65,7 @@ If you would like to install a specific version of `kubectl`, you can specify it
 ```yaml
 # Set up the Kubernetes CLI with your DigitalOcean Kubernetes cluster.
 - name: Set up kubectl
-  uses: matootie/dokube@v1.4.0
+  uses: matootie/dokube@v1.4.1
   with:
     personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
     clusterName: my-fabulous-cluster
